@@ -1,8 +1,10 @@
+require('dotenv').config({ path: './src/config/.env' })
 const express = require('express')
+const { logger } = require('./helpers/logger')
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 app.listen(port, () => {
-    console.log('server started on port:', port)
+    logger.info(`Custom log server started on port: ${port}`)
 })
