@@ -16,5 +16,6 @@
     "spaced-comment": 1,
     "arrow-parens": 0,
     "no-return-await": 1
-  }
+  },
+  "parser": "babel-eslint"
 }

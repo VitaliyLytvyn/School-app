@@ -1,4 +1,5 @@
 require('dotenv').config({ path: './src/config/.env' })
+require('./db/mongoose') // in that way just ensures /mongoose module runs
 const express = require('express')
 const router = require('./routes')
 const { logger } = require('./helpers/logger')
