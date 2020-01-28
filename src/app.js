@@ -1,5 +1,6 @@
 require('dotenv').config({ path: './src/config/.env' })
 const express = require('express')
+const router = require('./routes')
 const { logger } = require('./helpers/logger')
 const middlewares = require('./middlewares')
 
@@ -10,8 +11,7 @@ const app = express()
 middlewares(app)
 
 // routing code:
-//app.use(router);
-
+app.use(router);
 
 app.listen(port, () => {
     logger.info(`App server started on port: ${port}`)
