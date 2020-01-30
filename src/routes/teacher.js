@@ -42,7 +42,22 @@ router.delete('/teacher/:id', auth, async (req, res, next) => {
     }
 })
 
-
-
+router.patch('/teacher/:id', auth, async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowed = ['name', 'age']
+    const isvalid = updates.every((update) => allowed.includes(update))
+    if (!isvalid) {
+        res.status(400).send({ error: 'Invalid updates!' })
+    }
+    try {
+        const teacher = await teacherController.update(req.params.id, updates, req.body)
+        if (!teacher) {
+            return res.status(404).send()
+        }
+        res.send(teacher)
+    } catch (err) {
+        res.status(400).send()
+    }
+})
 
 module.exports = router

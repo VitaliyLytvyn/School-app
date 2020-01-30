@@ -15,7 +15,9 @@
     "arrow-body-style": 1,
     "spaced-comment": 1,
     "arrow-parens": 0,
-    "no-return-await": 1
+    "no-return-await": 0,
+    "no-return-assign": 0,
+    "no-underscore-dangle": 0
   },
   "parser": "babel-eslint"
 }
