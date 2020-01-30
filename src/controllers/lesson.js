@@ -1,19 +1,17 @@
-const GroupModel = require('../models/group')
-const StudentModel = require('../models/student')
 const LessonModel = require('../models/lesson')
 
-class GroupController {
-    getById = async (id) => await GroupModel.findOne({ _id: id })
+class LessonController {
+    getById = async (id) => await LessonModel.findOne({ _id: id })
 
-    getAll = async () => await GroupModel.find({})
+    getAll = async () => await LessonModel.find({})
 
     createNew = async (group) => {
-        const newGroup = new GroupModel(group)
+        const newGroup = new LessonModel(group)
         return await newGroup.save()
     }
 
     update = async (id, updates, body) => {
-        const group = await GroupModel.findOne({ _id: id })
+        const group = await LessonModel.findOne({ _id: id })
         if (!group) {
             return undefined
         }
@@ -27,16 +25,9 @@ class GroupController {
     }
 
     deleteById = async (id) => {
-        const group = await GroupModel.findOne({ _id: id })
-
-        // remove also all Students of the group
-        await StudentModel.remove({ _id: { $in: group.students } })
-
-        // remove also a lesson of the group
-        await LessonModel.findOneAndRemove({ group: id })
-
+        const group = await LessonModel.findOne({ _id: id })
         return await group.remove()
     }
 }
 
-module.exports = GroupController
+module.exports = LessonController

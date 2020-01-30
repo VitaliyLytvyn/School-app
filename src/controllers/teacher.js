@@ -1,4 +1,5 @@
 const TeacherModel = require('../models/teacher')
+const LessonModel = require('../models/lesson')
 
 class TeacherController {
     getById = async (id) => await TeacherModel.findOne({ _id: id })
@@ -24,7 +25,12 @@ class TeacherController {
         return await teacher.save()
     }
 
-    deleteById = async (id) => await TeacherModel.findByIdAndDelete(id)
+    deleteById = async (id) => {
+        // remove also a lesson of the teacher
+        await LessonModel.findOneAndRemove({ teacher: id })
+
+        return await TeacherModel.findByIdAndDelete(id)
+    }
 }
 
 module.exports = TeacherController
